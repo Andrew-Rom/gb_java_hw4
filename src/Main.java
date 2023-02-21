@@ -15,9 +15,9 @@ public class Main {
 
         Scanner in = new Scanner(System.in);
         System.out.println("""
-                Enter value and its key (e.g. text~4)
-                Enter "print" and key for output value (e.g. print~4).
-                Enter "exit" for stop program""");
+                Enter value and its key (integer number) (e.g. text~4).
+                Enter "print" and key (integer number) for output value (e.g. print~4).
+                Enter "exit" for stop program.""");
 
         LinkedList<String> valueList = new LinkedList<>();
         while (true) {
@@ -26,8 +26,9 @@ public class Main {
             if (isCorrectInput(readLine)) {
                 String[] dataArray = readLine.split("~");
                 if (dataArray[0].equals("print") && valueList.contains(dataArray[1])) {
-                    System.out.println(getValue(valueList, dataArray[1]));
-                    valueList.remove(dataArray[0]);
+                    String value = getValue(valueList, dataArray[1]);
+                    System.out.println(value);
+                    valueList.remove(value);
                     valueList.remove(dataArray[1]);
                 } else if (dataArray[0].equals("print") && !(valueList.contains(dataArray[1]))) {
                     System.out.println("\"\"");
@@ -63,9 +64,9 @@ public class Main {
         }
     }
 
-    private static String getValue (LinkedList<String> lst, String key) {
+    private static String getValue(LinkedList<String> lst, String key) {
         String value = "";
-        for (int i = 1; i < lst.size(); i+=2) {
+        for (int i = 1; i < lst.size(); i += 2) {
             if (lst.get(i).equals(key)) {
                 value = lst.get(i - 1);
                 break;
